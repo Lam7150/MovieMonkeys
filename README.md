@@ -16,6 +16,7 @@ To set up, first cd into `/backend`. Then:
     - This will install all project dependencies. You can skip this step after completing it for the first time.
 2. `yarn start`
     - Runs the api server at http://localhost:3000/
+    - To test, run endpoints on Postman.
 3. `yarn add <package-name>`
     - To install new project dependencies
 
