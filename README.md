@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="./src/assets/monkey.png" alt="Movie Monkeys Logo" width="200">
+  <img src="./frontend/src/assets/monkey.png" alt="Movie Monkeys Logo" width="200">
   <br/>
   Movie Monkeys
   </br>
