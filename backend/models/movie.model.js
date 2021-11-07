@@ -25,7 +25,38 @@ const Movie = function (movie) {
   this.Reviews_from_critics = movie.Reviews_from_critics;
 };
 
+// Gets all movies [limit 1000] with specified filters
 Movie.getAll = result => {
+  // Limiting this to 100 for the moment so we don't break the DB
+  sql.query("SELECT * FROM Movies LIMIT 100", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("movies: ", res);
+    result(null, res);
+  });
+};
+
+// Gets top rated movies by country [limit 1000]
+Movie.getTopByCountry = result => {
+  // Limiting this to 100 for the moment so we don't break the DB
+  sql.query("SELECT * FROM Movies LIMIT 100", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("movies: ", res);
+    result(null, res);
+  });
+};
+
+// Gets top rated movies by genre [limit 1000]
+Movie.getTopByGenre = result => {
   // Limiting this to 100 for the moment so we don't break the DB
   sql.query("SELECT * FROM Movies LIMIT 100", (err, res) => {
     if (err) {

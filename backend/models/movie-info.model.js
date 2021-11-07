@@ -1,13 +1,17 @@
 const sql = require("./db.js");
 
 // constructor
-const User = function (user) {
-  this.userName = user.userName;
-  this.firstName = user.firstName;
-  this.lastName = user.lastName;
+const MovieInfo = function (movieInfo) {
+  this.Imdb_title_id = movieInfo.Imdb_title_id;
+  this.Ordering = movieInfo.Ordering;
+  this.Imdb_name_id = movieInfo.Imdb_name_id;
+  this.Category = movieInfo.Category;
+  this.Job = movieInfo.Job;
+  this.Characters = movieInfo.Characters;
 };
 
-User.create = (newUser, result) => {
+MovieInfo.create = (newUser, result) => {
+  // Insert query below
   sql.query("INSERT INTO customers SET ?", newUser, (err, res) => {
     if (err) {
       console.log("error: ", err);

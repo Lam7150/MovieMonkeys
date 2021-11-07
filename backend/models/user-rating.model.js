@@ -8,15 +8,16 @@ const UserRating = function (rating) {
   this.movieRating = rating.movieRating;
 };
 
-UserRating.create = (newRating, result) => {
-  sql.query("INSERT INTO customers SET ?", newRating, (err, res) => {
+UserRating.create = (newUserRating, result) => {
+  // Insert query below
+  sql.query("INSERT INTO customers SET ?", newUserRating, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created customer: ", { id: res.insertId, ...newRating });
-    result(null, { id: res.insertId, ...newRating });
+    console.log("created customer: ", { id: res.insertId, ...newUserRating });
+    result(null, { id: res.insertId, ...newUserRating });
   });
 };
