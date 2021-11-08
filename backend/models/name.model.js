@@ -21,16 +21,17 @@ const Name = function (name) {
   this.Children = name.Children;
 };
 
-Name.create = (newName, result) => {
-  // Insert query below
-  sql.query("INSERT INTO customers SET ?", newName, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+Name.getNameById = (id, result) => {
+    sql.query(`SELECT Name FROM Names WHERE Imdb_name_id = "${id}" LIMIT 1`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+  
+      console.log("name: ", res);
+      result(null, res);
+    });
+  };
 
-    console.log("created customer: ", { id: res.insertId, ...newName });
-    result(null, { id: res.insertId, ...newName });
-  });
-};
+module.exports = Name;

@@ -15,24 +15,34 @@ exports.getAll = (req, res) => {
 
 // Gets top rated movies by country [limit 1000]
 exports.getTopByCountry = (req, res) => {
-  Movie.getTopByCountry((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving movies."
-      });
-    else res.send(data);
+  Movie.getTopByCountry(req.params.country, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No movies found for country with name ${req.params.country}.`
+        });
+      } else {
+        res.status(500).send({
+          message: `Error retrieving movies from country with name ${req.params.country}.`
+        });
+      }
+    } else res.send(data);
   });
 };
 
 // Gets top rated movies by genre [limit 1000]
 exports.getTopByGenre = (req, res) => {
-  Movie.getTopByGenre((err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving movies."
-      });
-    else res.send(data);
+  Movie.getTopByGenre(req.params.genre, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+            message: `No movies found for genre with name ${req.params.genre}.`
+        });
+      } else {
+        res.status(500).send({
+            message: `Error retrieving ${req.params.country} movies.`
+        });
+      }
+    } else res.send(data);
   });
 };

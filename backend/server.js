@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 // routes
 require("./routes/movie.routes.js")(app);
 require("./routes/movie-info.routes.js")(app);
-// require("./routes/name.routes.js")(app);
+require("./routes/name.routes.js")(app);
 //require("./routes/rating.routes.js")(app);
 require("./routes/user-rating.routes.js")(app);
 require("./routes/user.routes.js")(app);

@@ -40,10 +40,15 @@ Movie.getAll = result => {
   });
 };
 
-// Gets top rated movies by country [limit 1000]
-Movie.getTopByCountry = result => {
-  // Limiting this to 100 for the moment so we don't break the DB
-  sql.query("SELECT * FROM Movies LIMIT 100", (err, res) => {
+// Gets top rated movies by country [limit 10]
+Movie.getTopByCountry = (country, result) => {
+  // Limiting this to 10 for the moment so we don't break the DB
+  sql.query(`SELECT m.Original_title, m.Country, T.Mean_Vote, m.Director 
+  FROM Movies m INNER JOIN (Select m1.Imdb_title_id, m1.Title, r1.Mean_vote
+  FROM Movies m1 INNER JOIN Ratings r1 ON m1.Imdb_title_id = r1.Imdb_title_id
+  WHERE Country LIKE "%${country}%" AND Total_votes > 10000
+  Order by Mean_Vote DESC) as T on m.Imdb_title_id = T.Imdb_title_id
+  Order by Mean_Vote DESC LIMIT 10;`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -55,10 +60,16 @@ Movie.getTopByCountry = result => {
   });
 };
 
-// Gets top rated movies by genre [limit 1000]
-Movie.getTopByGenre = result => {
-  // Limiting this to 100 for the moment so we don't break the DB
-  sql.query("SELECT * FROM Movies LIMIT 100", (err, res) => {
+// Gets top rated movies by genre [limit 10]
+Movie.getTopByGenre = (genre, result) => {
+  // Limiting this to 10 for the moment so we don't break the DB
+  sql.query(`SELECT m.Original_title, m.Genre, T.Mean_Vote, m.Director 
+  FROM Movies m INNER JOIN (Select m1.Imdb_title_id, m1.Title, r1.Mean_vote
+  FROM Movies m1 INNER JOIN Ratings r1 ON m1.Imdb_title_id = r1.Imdb_title_id
+  WHERE Genre LIKE "%${genre}%" AND Total_votes > 10000
+  Order by Mean_Vote DESC) as T on m.Imdb_title_id = T.Imdb_title_id
+  WHERE m.Country = "USA"
+  Order by Mean_Vote DESC LIMIT 10;`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -71,8 +82,7 @@ Movie.getTopByGenre = result => {
 };
 
 Movie.getNameById = (id, result) => {
-  // Limiting this to 100 for the moment so we don't break the DB
-  sql.query(`SELECT Title FROM Movies WHERE Imdb_title_id = "${id}" LIMIT 1`, (err, res) => {
+  sql.query(`SELECT Original_title FROM Movies WHERE Imdb_title_id = "${id}" LIMIT 1`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
