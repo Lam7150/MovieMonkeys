@@ -3,6 +3,6 @@ module.exports = app => {
 
     app.post("/user", User.create);
     app.get("/user/:id", User.find);
-    app.delete("/user/:id", User.remove)
+    app.delete("/user/:id", User.remove);
 
 };

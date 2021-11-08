@@ -10,16 +10,15 @@ const MovieInfo = function (movieInfo) {
   this.Characters = movieInfo.Characters;
 };
 
-MovieInfo.create = (newUser, result) => {
+MovieInfo.find = (movieID, result) => {
   // Insert query below
-  sql.query("INSERT INTO customers SET ?", newUser, (err, res) => {
+  sql.query(`SELECT * FROM Movie_Information WHERE Imdb_title_id = "${movieID}"`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
-
-    console.log("created customer: ", { id: res.insertId, ...newUser });
-    result(null, { id: res.insertId, ...newUser });
+    result(null, res);
   });
 };
+module.exports = MovieInfo;

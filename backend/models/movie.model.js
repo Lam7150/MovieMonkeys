@@ -70,4 +70,18 @@ Movie.getTopByGenre = result => {
   });
 };
 
+Movie.getNameById = (id, result) => {
+  // Limiting this to 100 for the moment so we don't break the DB
+  sql.query(`SELECT Title FROM Movies WHERE Imdb_title_id = "${id}" LIMIT 1`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("movies: ", res);
+    result(null, res);
+  });
+};
+
 module.exports = Movie;
