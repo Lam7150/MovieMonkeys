@@ -48,16 +48,23 @@ const Rating = function (rating) {
   this.Non_us_voters_votes = rating.Non_us_voters_votes;
 };
 
-Rating.create = (newRating, result) => {
+Rating.find = (RatingID, result) => {
   // Insert query below
-  sql.query("INSERT INTO customers SET ?", newRating, (err, res) => {
+  sql.query(`SELECT * FROM Ratings Where Imdb_title_id =  "${RatingID}"`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
-    }
+    } 
+  if (res.length) {
+      console.log("found Rating: ", res[0]);
+      result(null, res[0]);
+      return;
+  }
 
-    console.log("created customer: ", { id: res.insertId, ...newRating });
-    result(null, { id: res.insertId, ...newRating });
+    // not found Customer with the id
+    result({ kind: "not_found" }, null);
   });
 };
+
+module.exports = Rating;
