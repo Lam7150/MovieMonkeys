@@ -10,6 +10,7 @@ const tmdb = axios.create({
   baseURL: `https://api.themoviedb.org/3`,
 })
 
+// movie
 export const getMovies = () =>
   db.get(`/movie`).then(
     (res) => res,
@@ -19,6 +20,25 @@ export const getMovies = () =>
     },
   );
 
+export const getTopMoviesByCountry = (country) =>
+  db.get(`/movie/country/${country}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const getTopMoviesByGenre = (genre) =>
+  db.get(`/movie/genre/${genre}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+// Movie Images
 export const getMovieDetailsBySearch = (movieName) =>
   tmdb.get(`/search/movie/?api_key=${TMDB_API_KEY}&query=${movieName.split(" ").join("+")}`).then(
     (res) => res,

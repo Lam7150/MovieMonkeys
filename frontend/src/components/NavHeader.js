@@ -22,6 +22,11 @@ function NavHeader() {
             Find a Movie
           </Link>
         </Menu.Item>
+        <Menu.Item key="top-movies">
+          <Link to="/top-movies">
+            Top Movies
+          </Link>
+        </Menu.Item>
         <Menu.Item key="profile">
           <Link to="/profile">
             Your Profile

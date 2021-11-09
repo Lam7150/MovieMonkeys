@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, Input, InputNumber } from 'antd';
+import { Select, Input } from 'antd';
 import { GENRES, COUNTRIES, YEARS, RATINGS } from "../utils/constants";
 import '../css/Filters.css';
 import { capitalize } from '../utils/utils';

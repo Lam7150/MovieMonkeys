@@ -8,6 +8,7 @@ import {
 import NavHeader from "./components/NavHeader";
 import UserPage from "./pages/UserPage";
 import MoviePage from "./pages/MoviePage";
+import TopMoviesPage from './pages/TopMoviesPage';
 
 import './css/App.css';
 
@@ -19,6 +20,9 @@ function App() {
         <Switch>
           <Route path="/profile">
             <UserPage />
+          </Route>
+          <Route path="/top-movies">
+            <TopMoviesPage />
           </Route>
           <Route path="/">
             <MoviePage />

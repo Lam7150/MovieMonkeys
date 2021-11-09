@@ -1,0 +1,25 @@
+.top-movie-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+}
+
+.top-movie-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  min-height: 60px;
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.top-movie-title {
+  font-size: 20px;
+  font-weight: bold;
+}

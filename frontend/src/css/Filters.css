@@ -9,31 +9,13 @@
   overflow: auto;
   padding-left: 8px;
   padding-right: 8px;
-  padding-bottom: 10px;
   border-top: 1px solid #ebebeb;
   border-bottom: 1px solid #ebebeb;
-}
-
-.filter-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
 }
 
 .filter-title {
   font-size: 16px;
   font-weight: bold;
-  margin-top: 10px;
-}
-
-.filter-number-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 
 .filter-number-title {
@@ -41,12 +23,10 @@
 }
 
 .ant-select {
-  margin-top: 10px !important;
 }
 
 .filter-search {
   margin-left: 10px;
-  margin-top: 10px;
 }
 
 .filter-select {

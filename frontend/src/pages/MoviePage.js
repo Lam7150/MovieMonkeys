@@ -18,7 +18,6 @@ function MoviePage() {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    console.log(movies);
     let filteredMovies = movies.filter(movie => {
       const genres = movie.Genre.split(", ");
       const countries = movie.Country.split(", ");
@@ -30,8 +29,6 @@ function MoviePage() {
         && (year ? movie.Year == year : true)
     })
 
-    console.log('filtered');
-    console.log(filteredMovies);
     setFilteredMovies(filteredMovies);
   }, [movies, name, genre, country, rating, year]);
 
