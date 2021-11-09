@@ -20,7 +20,7 @@ User.create = (newUser, result) => {
     result(null, { id: res.insertId, ...newUser });
   });
 };
-// add read 
+
 User.find = (Curr_User_ID, result) => {
   console.log(Curr_User_ID)
   // Insert query below
@@ -29,18 +29,18 @@ User.find = (Curr_User_ID, result) => {
       console.log("error: ", err);
       result(err, null);
       return;
-    } 
-  if (res.length) {
+    }
+    if (res.length) {
       console.log("found customer: ", res[0]);
       result(null, res[0]);
       return;
-  }
+    }
 
     // not found Customer with the id
     result({ kind: "not_found" }, null);
   });
 };
-// add remove 
+
 User.remove = (curr_user_id, result) => {
   sql.query(`DELETE FROM User_Info WHERE userName = "${curr_user_id}"`, (err, res) => {
     if (err) {

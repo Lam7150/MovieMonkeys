@@ -17,7 +17,6 @@ UserRating.create = (newUserRating, result) => {
       return;
     }
 
-    //console.log("created customer: ", { id: res.insertId, ...newUserRating });
     result(null, newUserRating);
   });
 };
@@ -25,17 +24,18 @@ UserRating.create = (newUserRating, result) => {
 UserRating.find = (Curr_User_ID, result) => {
   console.log(Curr_User_ID)
   // Insert query below
-  sql.query(`SELECT * FROM User_Movie_Info Where userName =  "${Curr_User_ID}" LIMIT 30`, (err, res) => {
+  sql.query(`SELECT * FROM User_Movie_Info WHERE userName =  "${Curr_User_ID}" LIMIT 30`, (err, res) => {
     console.log(res);
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
-    } 
+    }
+
     if (res.length) {
-        console.log("found customer: ", res);
-        result(null, res);
-        return;
+      console.log("found customer: ", res);
+      result(null, res);
+      return;
     }
 
     result({ kind: "not_found" }, null);

@@ -22,16 +22,15 @@ const Name = function (name) {
 };
 
 Name.getNameById = (id, result) => {
-    sql.query(`SELECT Name FROM Names WHERE Imdb_name_id = "${id}" LIMIT 1`, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-  
-      console.log("name: ", res);
-      result(null, res);
-    });
-  };
+  sql.query(`SELECT Name FROM Names WHERE Imdb_name_id = "${id}" LIMIT 1`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    result(null, res);
+  });
+};
 
 module.exports = Name;
