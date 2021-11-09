@@ -25,8 +25,23 @@ const Movie = function (movie) {
   this.Reviews_from_critics = movie.Reviews_from_critics;
 };
 
-// Gets all movies [limit 1000] with specified filters
-Movie.getAll = (title, result) => {
+// Gets all movies [limit 1000]
+Movie.getAll = result => {
+  // Limiting this to 100 for the moment so we don't break the DB
+  sql.query("SELECT * FROM Movies WHERE Country = 'USA' LIMIT 100", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("movies: ", res);
+    result(null, res);
+  });
+};
+
+// Gets movie by title
+Movie.getByTitle = (title, result) => {
   // Limiting this to 100 for the moment so we don't break the DB
   let query = `SELECT * FROM Movies WHERE Country = 'USA'`;
   if (title) {
