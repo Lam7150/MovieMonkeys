@@ -89,7 +89,7 @@ function TopMoviesPage() {
     <div className="top-movie-page">
       <div className="top-movie-header">
         <div className="top-movie-title"> Top 100 Rated Movies By </div>
-        <Select className="filter-select" size={'large'} defaultValue="Country" style={{ width: 120 }} allowClear onChange={handleTypeChange}>
+        <Select className="filter-select" size={'large'} defaultValue="Country" style={{ width: 120 }} onChange={handleTypeChange}>
           <Option value={'Country'}>Country</Option>
           <Option value={'Genre'}>Genre</Option>
         </Select>
