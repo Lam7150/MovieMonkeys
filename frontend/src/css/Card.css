@@ -1,0 +1,29 @@
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 270px;
+  background-color: #fff;
+  transition: box-shadow .3s;
+}
+
+.card-wrapper:hover {
+  box-shadow: 0px 4px 8px rgba(33,33,33,.2); 
+}
+
+.card-image {
+  background-position: center;
+  background-size: cover;
+  margin-top: 0.5em;
+  height: 300px;
+  width: 200px;
+}
+
+.card-name {
+  margin-top: 4px;
+  font-size: 16px;
+  color: #2769be;
+  font-weight: bold;
+}
