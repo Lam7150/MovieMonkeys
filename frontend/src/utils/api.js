@@ -38,6 +38,34 @@ export const getTopMoviesByGenre = (genre) =>
     },
   );
 
+// user
+export const getUser = (username) =>
+  db.get(`/user/${username}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const createUser = (newUser) =>
+  db.post(`/user`, newUser).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const deleteUser = (username) =>
+  db.delete(`/user/${username}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
 // Movie Images
 export const getMovieDetailsBySearch = (movieName) =>
   tmdb.get(`/search/movie/?api_key=${TMDB_API_KEY}&query=${movieName.split(" ").join("+")}`).then(
