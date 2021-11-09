@@ -28,7 +28,7 @@ const Movie = function (movie) {
 // Gets all movies [limit 1000]
 Movie.getAll = result => {
   // Limiting this to 100 for the moment so we don't break the DB
-  sql.query("SELECT * FROM Movies WHERE Country = 'USA' LIMIT 100", (err, res) => {
+  sql.query("SELECT * FROM Movies WHERE Country = 'USA' ORDER BY Year DESC, Votes DESC LIMIT 100", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -47,7 +47,7 @@ Movie.getByTitle = (title, result) => {
   if (title) {
     query += ` AND Title LIKE '%${title}%'`
   };
-  query += ` ORDER BY Votes DESC LIMIT 100;`
+  query += ` ORDER BY Year DESC, Votes DESC LIMIT 100;`
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
