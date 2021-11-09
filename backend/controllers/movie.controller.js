@@ -32,17 +32,17 @@ exports.getTopByCountry = (req, res) => {
 
 // Gets top rated movies by genre [limit 1000]
 exports.getTopByGenre = (req, res) => {
-  Movie.getTopByGenre(req.params.genre, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
+    Movie.getTopByGenre(req.params.genre, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
             message: `No movies found for genre with name ${req.params.genre}.`
-        });
-      } else {
-        res.status(500).send({
-            message: `Error retrieving ${req.params.country} movies.`
-        });
-      }
-    } else res.send(data);
-  });
-};
+          });
+        } else {
+          res.status(500).send({
+            message: `Error retrieving movies from genre with name ${req.params.genre}.`
+          });
+        }
+      } else res.send(data);
+    });
+  };

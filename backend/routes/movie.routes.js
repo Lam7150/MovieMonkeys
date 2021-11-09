@@ -5,8 +5,9 @@ module.exports = app => {
   app.get("/movie", movie.getAll);
 
   // Gets top rated movies by country [limit 10]
-  app.get("/movie/:country/top", movie.getTopByCountry);
+  app.get("/movie/country/:country", movie.getTopByCountry);
 
   // Gets top rated movies by genre [limit 10]
-  app.get("/movie/:genre/top", movie.getTopByGenre);
+  app.get("/movie/genre/:genre", movie.getTopByGenre);
+
 };
