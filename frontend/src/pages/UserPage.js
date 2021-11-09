@@ -68,7 +68,7 @@ function UserPage() {
   return (
     <div className="user-page">
       {!loggedIn ? (<div className="user-login-container">
-        <div className="user-login-title">Log In</div>
+        <div className="user-login-title">{signup ? "Sign Up" : "Log In"}</div>
         <Input placeholder="Enter username" allowClear style={{ width: 250, marginBottom: 10 }} onChange={handleUsernameChange} />
         {signup ? (
           <Input placeholder="Enter first name" allowClear style={{ width: 250, marginBottom: 10 }} onChange={handleFirstnameChange} />
