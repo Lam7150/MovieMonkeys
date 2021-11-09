@@ -1,60 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { getMovieDetailsBySearch, getMovieImageById } from '../utils/api';
+import { getMovies, getMovieDetailsBySearch, getMovieImageById } from '../utils/api';
 import Filters from '../components/Filters';
 import Gallery from '../components/Gallery';
 
 import '../css/MoviePage.css';
 
-const testMovies = [
-  { title: 'Alice in Wonderland' },
-  { title: 'Footloose' },
-  { title: 'Avengers: Infinity War' },
-  { title: 'Avengers: Infinity War' },
-  { title: 'Avengers: Infinity War' },
-  { title: 'Avengers: Infinity War' },
-  { title: 'Avengers: Infinity War' },
-  { title: 'Avengers: Infinity War' },
-]
-
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
 function MoviePage() {
-  const [movies, setMovies] = useState(testMovies);
-  const [movieImages, setMovieImages] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const [name, setName] = useState(null);
   const [genre, setGenre] = useState(null);
   const [country, setCountry] = useState(null);
   const [rating, setRating] = useState(null);
-  const [year, setYear] = useState(2021);
+  const [year, setYear] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  // useEffect(() => {
-  //   let sortedMovies = movies.sort((a, b) => a.id > b.id ? 1 : -1)
-  //   setMovies(sortedMovies);
-  // }, [movies]);
+  useEffect(() => {
+    console.log(movies);
+    let filteredMovies = movies.filter(movie => {
+      const genres = movie.Genre.split(", ");
+      const countries = movie.Country.split(", ");
+
+      return (name ? movie.Title.startsWith(name) : true)
+        && (genre ? genres.includes(genre) : true)
+        && (country ? countries.includes(country) : true)
+        && (rating ? movie.Avg_vote >= rating : true)
+        && (year ? movie.Year == year : true)
+    })
+
+    console.log('filtered');
+    console.log(filteredMovies);
+    setFilteredMovies(filteredMovies);
+  }, [movies, name, genre, country, rating, year]);
 
   useEffect(() => {
-    // let sortedPokemon = pokemon.sort((a, b) => a.id > b.id ? 1 : -1)
-    // let filteredPokemon = sortedPokemon.filter(poke => {
-    //   const types = poke.types.map(p => p.type.name);
-    //   const stats = poke.stats.map(p => p.base_stat);
-
-    //   return (name ? poke.name.startsWith(name) : true) && (type ? types.includes(type) : true) && poke.height >= height && poke.weight >= weight
-    //     && stats[0] >= hp && stats[1] >= attack
-    //     && stats[2] >= defense && stats[3] >= spAtk
-    //     && stats[4] >= spDef && stats[5] >= speed
-    // })
-    // setFilteredPokemon(filteredPokemon);
-  }, [name]);
-
-  useEffect(() => {
-    getMovieImages(movies);
+    getMovies().then((res) => {
+      if (res !== null) {
+        if (res.status === 200) {
+          setMovies(res.data);
+          getMovieImages(res.data);
+        }
+      }
+    });
   }, []);
 
   function getMovieImages(movies) {
     const movieDetailsPromises = movies.map((movie) => {
-      return getMovieDetailsBySearch(movie.title).then((res) => {
+      return getMovieDetailsBySearch(movie.Title).then((res) => {
         if (res !== null) {
           if (res.status === 200) {
             return res.data;
@@ -77,9 +71,8 @@ function MoviePage() {
       });
 
       Promise.all(movieImagePromises).then(function (results) {
-        const movieImageUrls = results.map(result => result.posters[0].file_path);
-        let newMovies = movies.map((movie, index) => ({ ...movie, imageUrl: `${imageBaseUrl}${movieImageUrls[index]}` }));
-        console.log(newMovies);
+        const movieImageUrls = results.map(result => result?.posters[0]?.file_path ? `${imageBaseUrl}${result.posters[0].file_path}` : '../assets/default-movie-poster.png');
+        let newMovies = movies.map((movie, index) => ({ ...movie, imageUrl: movieImageUrls[index] }));
         setMovies(newMovies);
       });
     });
@@ -94,7 +87,7 @@ function MoviePage() {
         setRating={setRating}
         setCountry={setCountry}
       />
-      <Gallery movies={movies} toggleModal={setModalVisible} />
+      <Gallery movies={filteredMovies} toggleModal={setModalVisible} />
     </div>
   );
 }

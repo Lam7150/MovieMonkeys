@@ -1,14 +1,23 @@
 const axios = require('axios').default;
 
 const db = axios.create({
-  baseURL: 'https://localhost:3000/',
+  baseURL: 'http://localhost:9000',
 });
 
 // should be in private file but whatever lol
 const TMDB_API_KEY = '872e0299c2559afe6d78340fd2a80cc6';
 const tmdb = axios.create({
-  baseURL: `https://api.themoviedb.org/3/`,
+  baseURL: `https://api.themoviedb.org/3`,
 })
+
+export const getMovies = () =>
+  db.get(`/movie`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
 
 export const getMovieDetailsBySearch = (movieName) =>
   tmdb.get(`/search/movie/?api_key=${TMDB_API_KEY}&query=${movieName.split(" ").join("+")}`).then(

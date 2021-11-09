@@ -11,8 +11,8 @@ function Card(props) {
 
   return (
     <div className="card-wrapper" onClick={displayMovieModal}>
-      <img src={movie.imageUrl} className="card-image" alt="movie-poster" />
-      <div className="card-name">{capitalize(movie.title)}</div>
+      <img src={movie.imageUrl} className="card-image" alt="" />
+      <div className="card-name">{capitalize(movie.Title)}</div>
     </div>
   );
 }

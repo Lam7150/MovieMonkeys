@@ -7,17 +7,6 @@ import { capitalize } from '../utils/utils';
 const { Option } = Select;
 const { Search } = Input;
 
-const NumberFilter = (props) => {
-  const { title, min, max, defaultValue, handleChange } = props;
-
-  return (
-    <div className="filter-number-container">
-      <div className="filter-number-title">{`${title}: `}</div>
-      <InputNumber min={min} max={max} defaultValue={defaultValue} onChange={handleChange} />
-    </div>
-  );
-}
-
 function Filters(props) {
   const { setGenre, setRating, setYear, setCountry, setName } = props;
 
@@ -34,7 +23,7 @@ function Filters(props) {
   }
 
   function handleYearChange(value) {
-    setYear(parseInt(value));
+    setYear(value);
   }
 
   function handleCountryChange(value) {
