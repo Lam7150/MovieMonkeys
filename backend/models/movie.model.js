@@ -26,9 +26,14 @@ const Movie = function (movie) {
 };
 
 // Gets all movies [limit 1000] with specified filters
-Movie.getAll = result => {
+Movie.getAll = (title, result) => {
   // Limiting this to 100 for the moment so we don't break the DB
-  sql.query("SELECT * FROM Movies LIMIT 100", (err, res) => {
+  let query = `SELECT * FROM Movies WHERE Country = 'USA'`;
+  if (title) {
+    query += ` AND Title LIKE '%${title}%'`
+  };
+  query += ` ORDER BY Votes DESC LIMIT 100;`
+  sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

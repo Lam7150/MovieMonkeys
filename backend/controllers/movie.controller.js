@@ -3,7 +3,7 @@ const Movie = require("../models/movie.model.js");
 
 // Gets all movies [limit 1000] with specified filters
 exports.getAll = (req, res) => {
-  Movie.getAll((err, data) => {
+  Movie.getAll(req.params.title, (err, data) => {
     if (err)
       res.status(500).send({
         message:
