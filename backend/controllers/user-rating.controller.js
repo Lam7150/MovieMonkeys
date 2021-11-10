@@ -1,5 +1,4 @@
 const UserRating = require("../models/user-rating.model.js");
-const Movie = require("../models/movie.model.js")
 
 // Gets users movies + ratings based on ID
 exports.find = (req, res) => {
@@ -54,26 +53,13 @@ exports.remove = (req, res) => {
 
 // Creates a user rating for movie
 exports.create = (req, res) => {
-  Movie.getNameById(req.params.movieID, (err, data) => {
-    if (err) {
-      res.status(500).send({ message: "could not find movie by id when creating user-rating" });
-    } else {
-      const userRating = new UserRating({
-        userName: req.params.id,
-        Imdb_title_ID: req.params.movieID,
-        movieName: data[0].Title,
-        movieRating: req.params.rating
+  UserRating.create(userRating, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the User."
       });
-
-      UserRating.create(userRating, (err, data) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the User."
-          });
-        else res.send(data);
-      });
-    }
+    else res.send(data);
   });
 };
 
