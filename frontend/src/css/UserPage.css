@@ -1,10 +1,19 @@
-.user-page {
+.user-login-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 40em;
   width: 100%;
+}
+
+.user-loggedin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  padding: 16px;
 }
 
 .user-login-container {
@@ -31,4 +40,28 @@
   align-items: center;
   width: 250px;
   justify-content: space-between;
+}
+
+.user-loggedin-header {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.user-loggedin-movies-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2769be;
+}
+
+.user-loggedin-table-wrapper {
+  padding: 20px;
+}
+
+.user-loggedin-table-poster {
+  background-position: center;
+  background-size: cover;
+  background-image: url('../assets/default-movie-poster.png');
+  height: 32px;
+  width: 32px;
+  text-indent: -10000px;
 }
