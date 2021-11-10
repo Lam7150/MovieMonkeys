@@ -53,11 +53,25 @@ exports.remove = (req, res) => {
 
 // Creates a user rating for movie
 exports.create = (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  // Create a User Rating
+  const userRating = new UserRating({
+    userName: req.body.userName,
+    Imdb_title_id: req.body.Imdb_title_id,
+    movieName: req.body.movieName,
+    movieRating: req.body.movieRating
+  });
+
   UserRating.create(userRating, (err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the User."
+          err.message || "Some error occurred while creating the User Rating."
       });
     else res.send(data);
   });

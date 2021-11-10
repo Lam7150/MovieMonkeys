@@ -3,7 +3,7 @@ const sql = require("./db.js");
 // constructor
 const UserRating = function (rating) {
   this.userName = rating.userName;
-  this.Imdb_title_ID = rating.Imdb_title_ID;
+  this.Imdb_title_id = rating.Imdb_title_id;
   this.movieName = rating.movieName;
   this.movieRating = rating.movieRating;
 };
@@ -17,7 +17,7 @@ UserRating.create = (newUserRating, result) => {
       return;
     }
 
-    result(null, newUserRating);
+    result(null, { id: res.insertId, ...newUserRating });
   });
 };
 
