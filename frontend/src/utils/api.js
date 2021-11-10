@@ -29,6 +29,15 @@ export const getMovieById = (id) =>
     },
   );
 
+export const getMoviesByTitle = (title) =>
+  db.get(`/movie/title/${title}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
 export const getTopMoviesByCountry = (country) =>
   db.get(`/movie/country/${country}`).then(
     (res) => res,
