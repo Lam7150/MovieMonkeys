@@ -25,6 +25,18 @@ exports.getById = (req, res) => {
   });
 };
 
+// Gets movie by title
+exports.getByTitle = (req, res) => {
+  Movie.getByTitle(req.params.title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving movies."
+      });
+    else res.send(data);
+  });
+};
+
 // Gets top rated movies by country [limit 1000]
 exports.getTopByCountry = (req, res) => {
   Movie.getTopByCountry(req.params.country, (err, data) => {

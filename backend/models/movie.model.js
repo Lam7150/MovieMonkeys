@@ -54,6 +54,20 @@ Movie.getById = (id, result) => {
   });
 };
 
+// Gets movie by title
+Movie.getByTitle = (title, result) => {
+  sql.query(`SELECT * FROM Movies WHERE Title LIKE "%${title}%"`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("movie: ", res);
+    result(null, res);
+  });
+};
+
 // Gets top 100 rated movies by country
 Movie.getTopByCountry = (country, result) => {
   sql.query(`SELECT * 
