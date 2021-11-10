@@ -24,7 +24,27 @@ UserRating.create = (newUserRating, result) => {
 UserRating.find = (Curr_User_ID, result) => {
   console.log(Curr_User_ID)
   // Insert query below
-  sql.query(`SELECT * FROM User_Movie_Info WHERE userName =  "${Curr_User_ID}" LIMIT 30`, (err, res) => {
+  sql.query(`SELECT * FROM User_Movie_Info WHERE userName =  "${Curr_User_ID}" LIMIT 100`, (err, res) => {
+    console.log(res);
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found customer: ", res);
+      result(null, res);
+      return;
+    }
+
+    result({ kind: "not_found" }, null);
+  });
+};
+
+UserRating.findMovie = (Curr_User_ID, Movie_ID, result) => {
+  // Insert query below
+  sql.query(`SELECT * FROM User_Movie_Info WHERE userName = "${Curr_User_ID}" AND Imdb_title_id = "${Movie_ID}"`, (err, res) => {
     console.log(res);
     if (err) {
       console.log("error: ", err);

@@ -18,6 +18,23 @@ exports.find = (req, res) => {
   });
 };
 
+// Gets user's movie rating
+exports.findMovie = (req, res) => {
+  UserRating.findMovie(req.params.id, req.params.movieID, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with id ${req.params.id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error getting user rating with id " + req.params.id + "and movie id" + req.params.movieID
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // Removes a user rating from table
 exports.remove = (req, res) => {
   UserRating.remove(req.params.id, req.params.movieID, (err, data) => {

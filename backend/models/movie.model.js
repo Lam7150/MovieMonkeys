@@ -27,8 +27,8 @@ const Movie = function (movie) {
 
 // Gets all movies [limit 1000]
 Movie.getAll = result => {
-  // Limiting this to 100 for the moment so we don't break the DB
-  sql.query("SELECT * FROM Movies WHERE Country = 'USA' ORDER BY Year DESC, Votes DESC LIMIT 100", (err, res) => {
+  // Limiting this to 500 for the moment so we don't break the DB
+  sql.query("SELECT * FROM Movies WHERE Country = 'USA' OR Country = 'India' ORDER BY Year DESC, Votes DESC LIMIT 500", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -42,12 +42,12 @@ Movie.getAll = result => {
 
 // Gets movie by title
 Movie.getByTitle = (title, result) => {
-  // Limiting this to 100 for the moment so we don't break the DB
-  let query = `SELECT * FROM Movies WHERE Country = 'USA'`;
+  // Limiting this to 500 for the moment so we don't break the DB
+  let query = `SELECT * FROM Movies WHERE Country = 'USA' OR Country = 'India'`;
   if (title) {
     query += ` AND Title LIKE '%${title}%'`
   };
-  query += ` ORDER BY Year DESC, Votes DESC LIMIT 100;`
+  query += ` ORDER BY Year DESC, Votes DESC LIMIT 500;`
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -60,15 +60,14 @@ Movie.getByTitle = (title, result) => {
   });
 };
 
-// Gets top rated movies by country [limit 10]
+// Gets top 100 rated movies by country
 Movie.getTopByCountry = (country, result) => {
-  // Limiting this to 10 for the moment so we don't break the DB
-  sql.query(`SELECT m.Original_title, m.Country, T.Mean_Vote, m.Director 
+  sql.query(`SELECT * 
   FROM Movies m INNER JOIN (Select m1.Imdb_title_id, m1.Title, r1.Mean_vote
   FROM Movies m1 INNER JOIN Ratings r1 ON m1.Imdb_title_id = r1.Imdb_title_id
   WHERE Country LIKE "%${country}%" AND Total_votes > 10000
   Order by Mean_Vote DESC) as T on m.Imdb_title_id = T.Imdb_title_id
-  Order by Mean_Vote DESC LIMIT 10;`, (err, res) => {
+  Order by Mean_Vote DESC LIMIT 100;`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -80,16 +79,15 @@ Movie.getTopByCountry = (country, result) => {
   });
 };
 
-// Gets top rated movies by genre [limit 10]
+// Gets top 100 rated movies by genre
 Movie.getTopByGenre = (genre, result) => {
-  // Limiting this to 10 for the moment so we don't break the DB
-  sql.query(`SELECT m.Original_title, m.Genre, T.Mean_Vote, m.Director 
+  sql.query(`SELECT *
   FROM Movies m INNER JOIN (Select m1.Imdb_title_id, m1.Title, r1.Mean_vote
   FROM Movies m1 INNER JOIN Ratings r1 ON m1.Imdb_title_id = r1.Imdb_title_id
   WHERE Genre LIKE "%${genre}%" AND Total_votes > 10000
   Order by Mean_Vote DESC) as T on m.Imdb_title_id = T.Imdb_title_id
   WHERE m.Country = "USA"
-  Order by Mean_Vote DESC LIMIT 10;`, (err, res) => {
+  Order by Mean_Vote DESC LIMIT 100;`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
