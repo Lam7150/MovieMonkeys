@@ -76,7 +76,7 @@ UserRating.remove = (Curr_User_ID, Movie_ID, result) => {
       return;
     }
 
-    console.log("deleted user with id: ", curr_user_id);
+    console.log("deleted user with id: ", Curr_User_ID);
     result(null, res);
   });
 };

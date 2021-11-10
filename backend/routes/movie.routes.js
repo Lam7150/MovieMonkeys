@@ -4,8 +4,8 @@ module.exports = app => {
   // Gets all movies [limit 1000]
   app.get("/movie", movie.getAll);
 
-  // Get movie by title
-  app.get("/movie/:title", movie.getByTitle);
+  // Get movie by id
+  app.get("/movie/:id", movie.getById);
 
   // Gets top rated movies by country [limit 10]
   app.get("/movie/country/:country", movie.getTopByCountry);

@@ -14,5 +14,5 @@ module.exports = app => {
   app.put("/user_ratings/:id/:movieID/:rating", UserRatings.update);
 
   // Removes a user rating from table
-  app.delete("/user_rating/:id/:movieID", UserRatings.remove);
+  app.delete("/user_ratings/:id/:movieID", UserRatings.remove);
 };

@@ -14,8 +14,8 @@ exports.getAll = (req, res) => {
 };
 
 // Gets movie by id
-exports.getByTitle = (req, res) => {
-  Movie.getByTitle(req.params.title, (err, data) => {
+exports.getById = (req, res) => {
+  Movie.getById(req.params.id, (err, data) => {
     if (err)
       res.status(500).send({
         message:

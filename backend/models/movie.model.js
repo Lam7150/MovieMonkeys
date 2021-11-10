@@ -40,22 +40,16 @@ Movie.getAll = result => {
   });
 };
 
-// Gets movie by title
-Movie.getByTitle = (title, result) => {
-  // Limiting this to 500 for the moment so we don't break the DB
-  let query = `SELECT * FROM Movies WHERE Country = 'USA' OR Country = 'India'`;
-  if (title) {
-    query += ` AND Title LIKE '%${title}%'`
-  };
-  query += ` ORDER BY Year DESC, Votes DESC LIMIT 500;`
-  sql.query(query, (err, res) => {
+// Gets movie by id
+Movie.getById = (id, result) => {
+  sql.query(`SELECT * FROM Movies WHERE Imdb_title_id = "${id}"`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("movies: ", res);
+    console.log("movie: ", res);
     result(null, res);
   });
 };
