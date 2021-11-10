@@ -153,7 +153,7 @@ function UserPage() {
       movies = movies.map((movie, index) => ({ ...movie, ...ratings[index] }));
 
       const movieDetailsPromises = movies.map((movie) => {
-        return getMovieDetailsBySearch(movie.Title).then((res) => {
+        return getMovieDetailsBySearch(movie.Original_title).then((res) => {
           if (res !== null) {
             if (res.status === 200) {
               return res.data;

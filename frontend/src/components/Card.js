@@ -27,7 +27,7 @@ function Card(props) {
       const newRating = {
         userName: username,
         Imdb_title_id: movie.Imdb_title_id,
-        movieName: movie.Title.substring(0, 45),
+        movieName: movie.Original_title.substring(0, 45),
         movieRating: rating
       }
 
@@ -49,7 +49,7 @@ function Card(props) {
   return (
     <div className="card-wrapper" onClick={() => { }}>
       <img src={movie.imageUrl} className="card-image" alt="" />
-      <div className="card-name">{capitalize(movie.Title)}</div>
+      <div className="card-name">{capitalize(movie.Original_title)}</div>
       <Button
         className="card-add-rating"
         onClick={toggleModal}
@@ -62,7 +62,7 @@ function Card(props) {
         title={
           <div className="flex-row">
             <div>Rate</div>
-            <div className="card-modal-title-blue">{movie.Title}</div>
+            <div className="card-modal-title-blue">{movie.Original_title}</div>
           </div>}
         centered
         visible={modalVisible}
