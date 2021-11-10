@@ -29,3 +29,26 @@
   color: #2769be;
   font-weight: bold;
 }
+
+.card-add-rating {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 150px;
+  z-index: 1;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-modal-title-blue {
+  margin-left: 6px;
+  color: #1ebbeb;
+}
+
+.card-modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

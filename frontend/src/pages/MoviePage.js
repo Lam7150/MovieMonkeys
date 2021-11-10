@@ -15,7 +15,6 @@ function MoviePage() {
   const [country, setCountry] = useState(null);
   const [rating, setRating] = useState(null);
   const [year, setYear] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     let filteredMovies = movies.filter(movie => {
@@ -84,7 +83,7 @@ function MoviePage() {
         setRating={setRating}
         setCountry={setCountry}
       />
-      <Gallery movies={filteredMovies} toggleModal={setModalVisible} />
+      <Gallery movies={filteredMovies} />
     </div>
   );
 }

@@ -20,6 +20,15 @@ export const getMovies = () =>
     },
   );
 
+export const getMovieById = (id) =>
+  db.get(`/movie/${id}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
 export const getTopMoviesByCountry = (country) =>
   db.get(`/movie/country/${country}`).then(
     (res) => res,
@@ -59,6 +68,52 @@ export const createUser = (newUser) =>
 
 export const deleteUser = (username) =>
   db.delete(`/user/${username}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+// user
+export const getUserRatings = (username) =>
+  db.get(`/user_ratings/${username}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const getUserRatingByMovieId = (username, movie_ID) =>
+  db.get(`/user_ratings/${username}/${movie_ID}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const createUserRating = (newRating) =>
+  db.post(`/user_ratings/`, newRating).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const updateUserRating = (username, movieId, rating) =>
+  db.put(`/user_ratings/${username}/${movieId}/${rating}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const deleteUserRating = (username, movieId) =>
+  db.delete(`/user_ratings/${username}/${movieId}`).then(
     (res) => res,
     (err) => {
       console.error(err);

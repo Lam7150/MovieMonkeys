@@ -3,12 +3,12 @@ import '../css/Gallery.css';
 import Card from "./Card";
 
 function Gallery(props) {
-  const { movies, toggleModal } = props;
+  const { movies } = props;
 
   return (
     <div className="gallery-wrapper">
       {movies.map((movie) => (
-        <Card movie={movie} toggleModal={toggleModal} />
+        <Card movie={movie} />
       ))}
     </div>
   );
