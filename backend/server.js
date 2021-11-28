@@ -25,6 +25,7 @@ require("./routes/name.routes.js")(app);
 require("./routes/rating.routes.js")(app);
 require("./routes/user-rating.routes.js")(app);
 require("./routes/user.routes.js")(app);
+require("./routes/user-movie-pref.routes.js")(app);
 
 // set port, listen for requests
 app.listen(9000, () => {
