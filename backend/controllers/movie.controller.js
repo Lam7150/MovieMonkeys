@@ -70,3 +70,19 @@ exports.getTopByGenre = (req, res) => {
     } else res.send(data);
   });
 };
+
+exports.getTopByPref = (req, res) => {
+  Movie.getTopByPref(req.query.genre, req.query.country, req.query.language, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No movies found for genre with name ${req.params.genre}.`
+        });
+      } else {
+        res.status(500).send({
+          message: `Error retrieving movies from genre with name ${req.params.genre}.`
+        });
+      }
+    } else res.send(data);
+  });
+}

@@ -16,4 +16,5 @@ module.exports = app => {
   // Gets top rated movies by genre [limit 10]
   app.get("/movie/genre/:genre", movie.getTopByGenre);
 
+  app.get("/movie/top/pref", movie.getTopByPref);
 };

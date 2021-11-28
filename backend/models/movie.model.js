@@ -120,4 +120,40 @@ Movie.getNameById = (id, result) => {
   });
 };
 
+Movie.getTopByPref = (genre, country, language, result) => {
+  var where_string = "";
+  if (genre != null) {
+    where_string += "Genre LIKE '" + genre + "' ";
+  }
+  if (country != null) {
+    if (genre != null) {
+      where_string += " AND ";
+    }
+    where_string += "Country='" + country + "' ";
+  }
+  if (language != null) {
+    if (genre != null || country != null) {
+      where_string += " AND ";
+    }
+    where_string += " Language='" + language + "' ";
+  }
+  console.log(where_string);
+  where_string = where_string.trim();
+  sql.query(`SELECT *
+  FROM Movies m INNER JOIN (Select m1.Imdb_title_id, m1.Title, r1.Mean_vote
+  FROM Movies m1 INNER JOIN Ratings r1 ON m1.Imdb_title_id = r1.Imdb_title_id
+  WHERE ${where_string} AND Total_votes > 10000
+  Order by Mean_Vote DESC) as T on m.Imdb_title_id = T.Imdb_title_id
+  Order by Mean_Vote DESC LIMIT 100;`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("movies: ", res);
+    result(null, res);
+  });
+};
+
 module.exports = Movie;
