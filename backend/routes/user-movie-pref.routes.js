@@ -3,4 +3,6 @@ module.exports = app => {
   
     // Find user movie preferences
     app.get("/user_movie_pref/:id", UserMoviePref.find);
+
+    app.post("/user_movie_pref/findMAX/:id", UserMoviePref.add);
 };

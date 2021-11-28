@@ -25,4 +25,15 @@ User_Movie_Pref.find = (Curr_User_ID, result) => {
       });
 }
 
+User_Movie_Pref.call = (Curr_User_ID, result) => {
+  sql.query(`CALL FindMAX("${Curr_User_ID}")`, (err, res) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+      return;
+    }
+    result(null, res);
+  });
+}
+
 module.exports = User_Movie_Pref;
