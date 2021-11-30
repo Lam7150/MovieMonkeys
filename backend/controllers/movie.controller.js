@@ -72,6 +72,7 @@ exports.getTopByGenre = (req, res) => {
 };
 
 exports.getTopByPref = (req, res) => {
+  console.log(req.query);
   Movie.getTopByPref(req.query.genre, req.query.country, req.query.language, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
