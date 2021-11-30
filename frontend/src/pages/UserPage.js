@@ -151,8 +151,9 @@ function UserPage() {
         if (res !== null) {
           if (res.status === 200) {
             const moviePrefs = {
-              ...res.data,
-              Genre: res.data.Genre.split(', ')[0]
+              genre: res.data.Genre.split(', ')[0],
+              country: res.data.Country.split(', ')[0],
+              language: res.data.Language.split(', ')[0]
             }
 
             setMoviePrefs(moviePrefs);
@@ -277,9 +278,9 @@ function UserPage() {
           <div className='user-loggedin-header'>{`Welcome, ${username}`}</div>
           <div className='user-loggedin-movies-title'>All About You</div>
           <div className='user-loggedin-top-wrapper'>
-            <TopInfoContainer title="Genre" value={moviePrefs?.Genre} />
-            <TopInfoContainer title="Country" value={moviePrefs?.Country} />
-            <TopInfoContainer title="Language" value={moviePrefs?.Language} />
+            <TopInfoContainer title="Genre" value={moviePrefs?.genre} />
+            <TopInfoContainer title="Country" value={moviePrefs?.country} />
+            <TopInfoContainer title="Language" value={moviePrefs?.language} />
           </div>
           <div className='user-loggedin-movies-title'>Movies Watched</div>
           <Table

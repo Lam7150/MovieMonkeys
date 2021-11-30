@@ -56,6 +56,15 @@ export const getTopMoviesByGenre = (genre) =>
     },
   );
 
+export const getTopMoviesByPreferences = (prefs) =>
+  db.get(`/movie/top/pref?genre=${prefs?.genre}&country=${prefs?.country}&language=${prefs?.language}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
 // user
 export const getUser = (username) =>
   db.get(`/user/${username}`).then(

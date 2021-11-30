@@ -14,6 +14,10 @@ function Card(props) {
   const [rated, setRated] = useState(false);
   const { username, setUsername } = useContext(AuthContext);
 
+  if (!movie) {
+    return null;
+  }
+
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   }
