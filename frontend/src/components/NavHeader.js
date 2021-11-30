@@ -19,12 +19,17 @@ function NavHeader() {
       <Menu mode="horizontal">
         <Menu.Item key="movies">
           <Link to="/">
-            Find a Movie
+            Movies
           </Link>
         </Menu.Item>
         <Menu.Item key="top-movies">
           <Link to="/top-movies">
             Top Movies
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="recommend-movie">
+          <Link to="/recommend-movie">
+            Recommend Me
           </Link>
         </Menu.Item>
         <Menu.Item key="profile">

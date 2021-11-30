@@ -130,6 +130,25 @@ export const deleteUserRating = (username, movieId) =>
     },
   );
 
+// user movie pref
+export const getUserPreferences = (username) =>
+  db.get(`/user_movie_pref/${username}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
+export const updateUserPreferences = (username) =>
+  db.post(`/user_movie_pref/findMAX/${username}`).then(
+    (res) => res,
+    (err) => {
+      console.error(err);
+      return null;
+    },
+  );
+
 // Movie Images
 export const getMovieDetailsBySearch = (movieName) =>
   tmdb.get(`/search/movie/?api_key=${TMDB_API_KEY}&query=${movieName.split(" ").join("+")}`).then(

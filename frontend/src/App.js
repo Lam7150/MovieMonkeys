@@ -10,6 +10,7 @@ import NavHeader from "./components/NavHeader";
 import UserPage from "./pages/UserPage";
 import MoviePage from "./pages/MoviePage";
 import TopMoviesPage from './pages/TopMoviesPage';
+import RecommendationPage from './pages/RecommendationPage';
 
 import './css/App.css';
 
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/top-movies">
               <TopMoviesPage />
+            </Route>
+            <Route path="/recommend-movie">
+              <RecommendationPage />
             </Route>
             <Route path="/">
               <MoviePage />

@@ -3,14 +3,26 @@ import { Input, Button, Table, Modal, Rate } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { AuthContext } from '../contexts/authContext';
 import { getMovieDetailsBySearch, getMovieImageById, getMovieById } from '../utils/api';
-import { getUser, createUser, deleteUser, getUserRatings, updateUserRating, deleteUserRating } from '../utils/api';
+import { getUser, createUser, getUserPreferences, getUserRatings, updateUserRating, deleteUserRating } from '../utils/api';
 import '../css/UserPage.css';
 import '../css/Card.css';
 
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
+const TopInfoContainer = (props) => {
+  const { title, value } = props;
+
+  return (
+    <div className='top-info-container'>
+      <div className='top-info-title'>{`Top ${title}`}</div>
+      <div className='top-info-text'>{value}</div>
+    </div>
+  )
+};
+
 function UserPage() {
   const [movies, setMovies] = useState([]);
+  const [moviePrefs, setMoviePrefs] = useState();
   const [tentName, setTentname] = useState();
   const [firstname, setFirstname] = useState();
   const [lastname, setLastname] = useState();
@@ -134,6 +146,19 @@ function UserPage() {
           }
         }
       });
+
+      getUserPreferences(username).then((res) => {
+        if (res !== null) {
+          if (res.status === 200) {
+            const moviePrefs = {
+              ...res.data,
+              Genre: res.data.Genre.split(', ')[0]
+            }
+
+            setMoviePrefs(moviePrefs);
+          }
+        }
+      });
     }
   }, [username]);
 
@@ -248,15 +273,19 @@ function UserPage() {
           <Button type={signup ? "primary" : "default"} style={{ width: (signup ? 250 : 120) }} onClick={handleSignup}>Sign Up</Button>
         </div>
       </div>) :
-        (<div>
+        (<>
           <div className='user-loggedin-header'>{`Welcome, ${username}`}</div>
-          <div className='user-loggedin-movies-title'>Movies Watched</div>
-          <div className="user-loggedin-table-wrapper">
-            <Table
-              columns={columns}
-              dataSource={movies}
-            />
+          <div className='user-loggedin-movies-title'>All About You</div>
+          <div className='user-loggedin-top-wrapper'>
+            <TopInfoContainer title="Genre" value={moviePrefs?.Genre} />
+            <TopInfoContainer title="Country" value={moviePrefs?.Country} />
+            <TopInfoContainer title="Language" value={moviePrefs?.Language} />
           </div>
+          <div className='user-loggedin-movies-title'>Movies Watched</div>
+          <Table
+            columns={columns}
+            dataSource={movies}
+          />
           <Modal
             title={
               <div className="flex-row">
@@ -281,7 +310,7 @@ function UserPage() {
               <Rate count={10} value={rating} onChange={handleRatingChange} />
             </div>
           </Modal>
-        </div>)}
+        </>)}
     </div>
   );
 }
