@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../contexts/authContext';
-import { getMovies, getUserPreferences, updateUserPreferences, getMovieDetailsBySearch, getMovieImageById } from '../utils/api';
+import { getTopMoviesByPreferences, getUserPreferences, updateUserPreferences, getMovieDetailsBySearch, getMovieImageById } from '../utils/api';
 import { Button } from 'antd';
 import { StarFilled } from '@ant-design/icons';
 
@@ -53,15 +53,15 @@ function RecommendationPage() {
             }
 
             setMoviePrefs(moviePrefs);
-          }
-        }
-      });
 
-      getMovies().then((res) => {
-        if (res !== null) {
-          if (res.status === 200) {
-            setMovies(res.data);
-            getMovieImages(res.data);
+            getTopMoviesByPreferences(moviePrefs).then((res) => {
+              if (res !== null) {
+                if (res.status === 200) {
+                  setMovies(res.data);
+                  getMovieImages(res.data);
+                }
+              }
+            });
           }
         }
       });
