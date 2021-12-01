@@ -28,7 +28,7 @@ const Movie = function (movie) {
 // Gets all movies [limit 1000]
 Movie.getAll = result => {
   // Limiting this to 500 for the moment so we don't break the DB
-  sql.query("SELECT * FROM Movies WHERE Country = 'USA' OR Country = 'India' ORDER BY Year DESC, Votes DESC LIMIT 100", (err, res) => {
+  sql.query("SELECT * FROM Movies WHERE Country = 'USA' OR Country = 'India' ORDER BY Year DESC, Votes DESC LIMIT 500", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -148,7 +148,7 @@ Movie.getTopByPref = (genre, country, language, result) => {
   sql.query(`SELECT *
   FROM Movies m INNER JOIN (Select m1.Imdb_title_id, m1.Title, r1.Mean_vote
   FROM Movies m1 INNER JOIN Ratings r1 ON m1.Imdb_title_id = r1.Imdb_title_id
-  WHERE ${where_string} Total_votes > 1000
+  WHERE ${where_string} Total_votes > 100
   Order by Mean_Vote DESC) as T on m.Imdb_title_id = T.Imdb_title_id
   Order by Mean_Vote DESC LIMIT 100;`, (err, res) => {
     if (err) {
