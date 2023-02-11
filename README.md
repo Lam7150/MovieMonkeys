@@ -33,6 +33,11 @@ To set up, first cd into `/frontend`. Then:
 3. `yarn add <package-name>`
     - To install new project dependencies
 
+### Website Preview
+<img width="1440" alt="Screen Shot 2021-11-30 at 12 47 56 PM" src="https://user-images.githubusercontent.com/29765024/218225213-f96a5d04-2154-4891-8398-03764ad4c431.png">
+<img width="721" alt="Screen Shot 2021-11-30 at 12 47 43 PM" src="https://user-images.githubusercontent.com/29765024/218225255-8dd2d041-332f-43ed-a0af-28962173da86.png">
+
+
 ## Learn More
 
 To learn React, check out the [React documentation](https://reactjs.org/).
